@@ -1,11 +1,11 @@
-# smart-base
+# Smart Base
 Base de Conhecimentos (Knowledge Base) com Spring
 
 Projeto em andamento...
 
 # O que é Base de Conhecimento?
 
-Base de Conhecimento define bases de dados ou conhecimento acumulados sobre um determinado assunto. Como dizem, é um tema mítico do ITIL e que todos desejam ter, mas requer muito empenho e dedicação para conseguir manter. Mas se bem empregada e funcional, melhora e muito a qualidade de atendimento e ajuda aos técnicos principalmente.
+Base de Conhecimento define bases de dados ou conhecimento acumulados sobre um determinado assunto.Se bem empregada e funcional, melhora e muito a qualidade de atendimento e ajuda aos técnicos principalmente.
 
 # Para que serve?
 
