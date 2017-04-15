@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt"
-xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -9,12 +9,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 	<title>SmartBase</title>
 
-	<link rel="stylesheet" type="text/css" href="layout/stylesheets/vendors.min.css"/>
-	<link rel="stylesheet" type="text/css" href="layout/stylesheets/algaworks.min.css"/>
-	<link rel="stylesheet" type="text/css" href="layout/stylesheets/application.css"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/vendors.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/algaworks.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/application.css}"/>
 
 
-	<script src="layout/tinymce/tinymce.min.js"></script>
+	<script th:src="@{/layout/tinymce/tinymce.min.js}"></script>
   	<script>tinymce.init({
   	  selector: 'textarea',
   	  height: 500,
@@ -26,7 +26,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
   	    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
   	  imagetools_cors_hosts: ['www.tinymce.com', 'codepen.io'],
   	  content_css: [
-  	    '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
   	    '//www.tinymce.com/css/codepen.min.css'
   	  ]
   	});</script>
@@ -46,7 +45,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 	    <div class="navbar-header">
 	      <a class="navbar-brand  hidden-xs" href="#">
-	        <img alt="Knowledge" src="layout/images/logo.png"/>
+	        <img alt="Knowledge" th:src="@{/layout/images/logo.png}"/>
 	      </a>
 
 	      <ul class="nav  navbar-nav">
@@ -95,12 +94,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
      <nav class="aw-menu  js-menu">
 	      <ul class="aw-menu__list">
-	        <li class="aw-menu__item is-active">
+	        <li class="aw-menu__item ">
 	          <a href="cadastro-artigo.html"><i class="fa  fa-fw  fa-home"></i><span>Cadastro Artigo</span></a>
 	        </li>
 	        
-	         <li class="aw-menu__item ">
-	          <a href="index.html"><i class="fa  fa-fw  fa-home"></i><span>Pesquisa Artigo</span></a>
+	         <li class="aw-menu__item is-active">
+	          <a href="pesquisa-artigo.html"><i class="fa  fa-fw  fa-home"></i><span>Pesquisa Artigo</span></a>
 	        </li>
 	      </ul>
     </nav>
@@ -123,26 +122,26 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div class="container-fluid">
 
 
-	<form method="get" class="form-vertical  js-form-loading">
+	<form method="POST" class="form-vertical  js-form-loading">
 		
 		<div class="form-group">
-			<label for="input-produto-nome">Título</label>
-			<input id="input-produto-nome" type="text" class="form-control"/>
+			<label for="input-artigo-nome">Título</label>
+			<input id="input-artigo-nome" type="text" class="form-control"/>
 		</div>
 		
 		<div class="form-group">
-			<label for="input-produto-nome">Sub Título</label>
-			<input id="input-produto-nome" type="text" class="form-control"/>
+			<label for="input-artigo-nome">Sub Título</label>
+			<input id="input-artigo-nome" type="text" class="form-control"/>
 		</div>
 
 		<div class="form-group">
-			<label for="input-produto-descricao">Descrição</label>
-			<textarea id="input-produto-descricao" rows="3" class="form-control"></textarea>
+			<label for="input-artigo-descricao">Descrição</label>
+			<textarea id="input-artigo-descricao" rows="3" class="form-control"></textarea>
 		</div>
 
 		<div class="form-group">
 			<button class="btn  btn-primary" type="submit">Salvar</button>
-			<a href="pesquisa-produtos.html" class="btn  btn-default">Cancelar</a>
+			<a href="pesquisa-artigos.html" class="btn  btn-default">Cancelar</a>
 		</div>
 
 	</form>
@@ -171,8 +170,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	</div>
 </div>
 
-<script src="layout/javascripts/vendors.min.js"></script>
-<script src="layout/javascripts/algaworks.min.js"></script>
-<script src="layout/tinymce/pt_BR.js"></script>
+<script th:src="@{/layout/javascripts/vendors.min.js}"></script>
+<script th:src="@{/layout/javascripts/algaworks.min.js}"></script>
+<script th:src="@{/layout/tinymce/pt_BR.js}"></script>
 </body>
 </html>
