@@ -122,21 +122,24 @@ xmlns="http://www.w3.org/1999/xhtml"
 <div class="container-fluid">
 
 
-	<form method="POST" class="form-vertical  js-form-loading">
+	<form method="POST" class="form-vertical  js-form-loading" th:object="${artigo}">
 		
 		<div class="form-group">
-			<label for="input-artigo-nome">Título</label>
-			<input id="input-artigo-nome" type="text" class="form-control"/>
+			<label for="titulo">Título</label>
+			<input id="titulo" type="text" class="form-control" th:field="*{titulo}"/>
 		</div>
 		
 		<div class="form-group">
-			<label for="input-artigo-nome">Sub Título</label>
-			<input id="input-artigo-nome" type="text" class="form-control"/>
+			<label for="categoria">Categoria</label>
+			<select id="categoria" class="form-control">
+			<option value="">Selecione a categoria</option>
+			<!-- <option th:each="categoria : ${categorias}"></option> -->
+			</select>
 		</div>
 
 		<div class="form-group">
 			<label for="input-artigo-descricao">Descrição</label>
-			<textarea id="input-artigo-descricao" rows="3" class="form-control"></textarea>
+			<textarea id="input-artigo-descricao" rows="3" class="form-control" th:field="*{descricao}"></textarea>
 		</div>
 
 		<div class="form-group">
