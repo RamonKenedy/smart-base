@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 public class Artigo {
 
@@ -20,6 +22,7 @@ public class Artigo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank
 	private String titulo;
 
 	private Date dtInclusao;
@@ -36,6 +39,7 @@ public class Artigo {
 	@JoinColumn(name = "usuario")
 	private Usuario usuario;
 
+	@NotBlank
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	private String descricao;

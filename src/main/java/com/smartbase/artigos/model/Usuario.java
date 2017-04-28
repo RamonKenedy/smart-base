@@ -8,6 +8,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Usuario {
@@ -22,8 +25,10 @@ public class Usuario {
 
 	private Date dtExclusao;
 
+	@NotBlank
 	private String nome;
 
+	@NotNull
 	private String senha;
 
 	private String email;
