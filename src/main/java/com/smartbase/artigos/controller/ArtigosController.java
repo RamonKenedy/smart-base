@@ -7,7 +7,9 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,6 +29,7 @@ public class ArtigosController {
 	@GetMapping("/novo")
 	public ModelAndView novo(Artigo artigo) {
 		ModelAndView mv = new ModelAndView("artigo/cadastro-artigo");
+		mv.addObject(artigo);
 		// mv.addObject("categorias", Categoria.)
 		return mv;
 	}
@@ -47,6 +50,20 @@ public class ArtigosController {
 		mv.addObject("artigos",
 				artigos.findByTituloContainingIgnoreCase(Optional.ofNullable(artigoFilter.getTitulo()).orElse("%")));
 		return mv;
+	}
+
+	@GetMapping("/{id}")
+	public ModelAndView editar(@PathVariable Long id) {
+		Artigo artigo = artigos.findOne(id);
+		return novo(artigo);
+
+	}
+
+	@DeleteMapping("/{id}")
+	public String apagar(@PathVariable Long id,RedirectAttributes attributes) {
+		artigos.delete(id);
+		attributes.addFlashAttribute("mensagem", "Artigo removido com sucesso!");
+		return "redirect:/artigos";
 	}
 
 }
