@@ -39,12 +39,12 @@ xmlns="http://www.w3.org/1999/xhtml"
 					<tbody>
 						<tr th:each="artigo : ${artigos}">
 							<td><a th:href="@{/artigos/{id}(id=${artigo.id})}" th:text="${artigo.titulo}"></a></td>
-							<td class="text-center" >
-						<i class="fa  fa-trash" style="cursor:pointer"
-							data-toggle="modal" data-target="#confirmaExclusaoModal"
-							data:titulo="${artigo.titulo}" 
-							data:url-apagar="@{/artigos/{id}(id=${artigo.id})}"></i>
-					</td>
+							<td class="text-center" sec:authorize="hasRole('ROLE_CADASTRAR_ARTIGO')" >
+								<i class="fa  fa-trash" style="cursor:pointer"
+									data-toggle="modal" data-target="#confirmaExclusaoModal"
+									data:titulo="${artigo.titulo}" 
+									data:url-apagar="@{/artigos/{id}(id=${artigo.id})}"></i>
+							</td>
 						</tr>
 						<tr th:if="${artigos.empty}">
 							<td colspan="5">Nenhum artigo encontrado</td>
