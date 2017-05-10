@@ -45,7 +45,8 @@
 								th:field="*{categoria}">
 								<option value="">Selecione a categoria</option>
 								<option th:each="categoria : ${categorias}"
-									th:value="${categoria.id}" th:text="${categoria.descricao}">Pale lager</option>
+									th:value="${categoria.id}" th:text="${categoria.descricao}">Pale
+									lager</option>
 							</select>
 						</div>
 					</div>
@@ -74,7 +75,7 @@
 		<div th:replace="categoria/CadastroRapidoCategoria :: modal"></div>
 	</section>
 	<th:block layout:fragment="javascript-extra">
-	<script th:src="@{/javascripts/categoria.cadastro-rapido.js}"></script>
-</th:block>
+		<script th:src="@{/javascripts/categoria.cadastro-rapido.js}"></script>
+	</th:block>
 </body>
 </html>
