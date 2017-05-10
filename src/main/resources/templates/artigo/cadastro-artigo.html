@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt"
-xmlns="http://www.w3.org/1999/xhtml" 
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/layout-padrao}">
@@ -9,52 +8,73 @@ xmlns="http://www.w3.org/1999/xhtml"
 	<section layout:fragment="conteudo">
 		<div class="page-header">
 			<div class="container-fluid">
-				<h1>
-					Cadastro Artigo
-				</h1>
+				<h1>Cadastro Artigo</h1>
 			</div>
 		</div>
 		<div class="container-fluid">
-			<form method="POST" class="form-vertical  js-form-loading" th:object="${artigo}" th:action="@{/artigos/novo}">
-				<div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<form method="POST" class="form-vertical  js-form-loading"
+				th:object="${artigo}" th:action="@{/artigos/novo}">
+				<div class="alert  alert-danger  alert-dismissible" role="alert"
+					th:if="${#fields.hasAnyErrors()}">
+					<button type="button" class="close" data-dismiss="alert"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 					<th:block th:each="error : ${#fields.detailedErrors()}">
 						<div>
-							<i class="fa  fa-exclamation-circle"></i>
-							<span th:text="${error.message}"></span>
+							<i class="fa  fa-exclamation-circle"></i> <span
+								th:text="${error.message}"></span>
 						</div>
 					</th:block>
 				</div>
-				<div class="alert  alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+				<div class="alert  alert-success"
+					th:if="${!#strings.isEmpty(mensagem)}">
 					<span th:text="${mensagem}"></span>
 				</div>
-				<input type="hidden" th:field="*{id}"/>
-				
+				<input type="hidden" th:field="*{id}" />
+
 				<div class="form-group">
-					<label for="titulo">Título</label>
-					<input id="titulo" type="text" class="form-control" th:field="*{titulo}"/>
+					<label for="titulo">Título</label> <input id="titulo" type="text"
+						class="form-control" th:field="*{titulo}" />
 				</div>
-				
-				<div class="form-group">
-					<label for="categoria">Categoria</label>
-					<select id="categoria" class="form-control">
-					<option value="">Selecione a categoria</option>
-					<!-- <option th:each="categoria : ${categorias}"></option> -->
-					</select>
+				<label for="categoria">Categoria</label>
+				<div class="row">
+					<div class="col-sm-11  form-group">
+						<div class="bw-field-action">
+							<select id="categoria" class="form-control"
+								th:field="*{categoria}">
+								<option value="">Selecione a categoria</option>
+								<option th:each="categoria : ${categorias}"
+									th:value="${categoria.id}" th:text="${categoria.descricao}">Pale lager</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-1  form-group">
+						<div class="bw-field-action__icon">
+							<a href="#" data-toggle="modal"
+								data-target="#modalCadastroRapidoCategoria"> <i
+								class="glyphicon  glyphicon-plus-sign  bw-glyphicon-large"></i>
+							</a>
+						</div>
+					</div>
 				</div>
-		
+
 				<div class="form-group">
 					<label for="input-artigo-descricao">Descrição</label>
-					<textarea id="input-artigo-descricao" rows="3" class="form-control" th:field="*{descricao}"></textarea>
+					<textarea id="input-artigo-descricao" rows="3" class="form-control"
+						th:field="*{descricao}"></textarea>
 				</div>
-		
+
 				<div class="form-group">
 					<button class="btn  btn-primary" type="submit">Salvar</button>
 					<a th:href="@{/artigos}" class="btn  btn-default">Cancelar</a>
 				</div>
 			</form>
 		</div>
-		
+		<div th:replace="categoria/CadastroRapidoCategoria :: modal"></div>
 	</section>
+	<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/javascripts/categoria.cadastro-rapido.js}"></script>
+</th:block>
 </body>
 </html>
