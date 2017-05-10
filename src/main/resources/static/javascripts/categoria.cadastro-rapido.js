@@ -1,0 +1,64 @@
+var Brewer = Brewer || {};
+
+Brewer.CategoriaCadastroRapido = (function() {
+	
+	function CategoriaCadastroRapido() {
+		this.modal = $('#modalCadastroRapidoCategoria');
+		this.botaoSalvar = this.modal.find('.js-modal-cadastro-categoria-salvar-btn');
+		this.form = this.modal.find('form');
+		this.url = this.form.attr('action');
+		this.inputDescricaoCategoria = $('#descricaoCategoria');
+		this.containerMensagemErro = $('.js-mensagem-cadastro-rapido-categoria');
+	}
+	
+	CategoriaCadastroRapido.prototype.iniciar = function() {
+		this.form.on('submit', function(event) { event.preventDefault() });
+		this.modal.on('shown.bs.modal', onModalShow.bind(this));
+		this.modal.on('hide.bs.modal', onModalClose.bind(this))
+		this.botaoSalvar.on('click', onBotaoSalvarClick.bind(this));
+	}
+	
+	function onModalShow() {
+		this.inputDescricaoCategoria.focus();
+	}
+	
+	function onModalClose() {
+		this.inputDescricaoCategoria.val('');
+		this.containerMensagemErro.addClass('hidden');
+		this.form.find('.form-group').removeClass('has-error');
+	}
+	
+	function onBotaoSalvarClick() {
+		var descricaoCategoria = this.inputDescricaoCategoria.val().trim();
+		$.ajax({
+			url: this.url,
+			method: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify({ descricao: descricaoCategoria }),
+			error: onErroSalvandoCategoria.bind(this),
+			success: onCategoriaSalvo.bind(this)
+		});
+	}
+	
+	function onErroSalvandoCategoria(obj) {
+		var mensagemErro = obj.responseText;
+		this.containerMensagemErro.removeClass('hidden');
+		this.containerMensagemErro.html('<span>' + mensagemErro + '</span>');
+		this.form.find('.form-group').addClass('has-error');
+	}
+	
+	function onCategoriaSalvo(categoria) {
+		var comboCategoria = $('#categoria');
+		comboCategoria.append('<option value=' + categoria.id + '>' + categoria.descricao + '</option>');
+		comboCategoria.val(categoria.codigo);
+		this.modal.modal('hide');
+	}
+	
+	return CategoriaCadastroRapido;
+	
+}());
+
+$(function() {
+	var categoriaCadastroRapido = new Brewer.CategoriaCadastroRapido();
+	categoriaCadastroRapido.iniciar();
+});

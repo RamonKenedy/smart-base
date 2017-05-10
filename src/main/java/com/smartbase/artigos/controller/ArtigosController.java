@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.smartbase.artigos.model.Artigo;
 import com.smartbase.artigos.repository.Artigos;
+import com.smartbase.artigos.repository.Categorias;
 import com.smartbase.artigos.repository.filter.ArtigoFilter;
 
 @Controller
@@ -25,12 +26,14 @@ public class ArtigosController {
 
 	@Autowired
 	private Artigos artigos;
+	@Autowired
+	private Categorias categorias;
 
 	@GetMapping("/novo")
 	public ModelAndView novo(Artigo artigo) {
 		ModelAndView mv = new ModelAndView("artigo/cadastro-artigo");
 		mv.addObject(artigo);
-		// mv.addObject("categorias", Categoria.)
+		mv.addObject("categorias", categorias.findAll());
 		return mv;
 	}
 
@@ -60,7 +63,7 @@ public class ArtigosController {
 	}
 
 	@DeleteMapping("/{id}")
-	public String apagar(@PathVariable Long id,RedirectAttributes attributes) {
+	public String apagar(@PathVariable Long id, RedirectAttributes attributes) {
 		artigos.delete(id);
 		attributes.addFlashAttribute("mensagem", "Artigo removido com sucesso!");
 		return "redirect:/artigos";
